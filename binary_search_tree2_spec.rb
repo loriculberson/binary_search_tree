@@ -7,8 +7,10 @@ RSpec.describe '#BinarySearchTree' do
     it "has a value and no children" do 
       value = 5
 
-      node = Node.new(value, left:nil, right:nil)
+      tree = BinaryTree.new(value)
+      node = Node.new(tree, value)
 
+      expect(node.parent).to eq(tree)
       expect(node.value).to eq(5)
       expect(node.left).to eq(nil)
       expect(node.right).to eq(nil)
@@ -82,7 +84,6 @@ RSpec.describe '#BinarySearchTree' do
       expect(child.right).to eq(grandchild_right_node)
       expect(child.right.value).to eq(9)
     end
-
   end
 
   context "#BinaryTree" do 
@@ -94,5 +95,19 @@ RSpec.describe '#BinarySearchTree' do
       expect(tree.root.value).to eq(5)
     end
 
+    it "knows it has one node" do 
+      root_value = 5
+      tree = BinaryTree.new(root_value)
+
+      expect(tree.total_nodes).to eq(1)
+    end
+
+    it "knows it has two nodes" do 
+      root_value = 5
+      tree = BinaryTree.new(root_value)
+      tree.root.create_child_node(1)
+
+      expect(tree.total_nodes).to eq(2)
+    end
   end
 end
